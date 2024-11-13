@@ -31,7 +31,6 @@ export default function MovieCard(
                 ) : (
                     <Image
                         loading={index === 0 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : "low"}
                         src={`//wsrv.nl/?url=${item.thumb_url}&w=200&h=300&output=webp`}
                         removeWrapper={true}
                         alt={item.name}
