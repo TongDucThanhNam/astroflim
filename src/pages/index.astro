@@ -1,8 +1,31 @@
 ---
-import { Welcome } from 'astro:components';
-import Layout from '../layouts/Layout.astro';
+export const prerender = true
+import type {PhimMoiCapNhatResponse} from "@/types/types";
+import Layout from '@/layouts/Layout.astro';
+import SelectSection from "@/components/SelectSection";
+import MovieGridSection from "@/components/MovieGridSection.astro";
+import MovieGridSkeleton from "../components/MovieGridSkeleton.astro";
+
+
+
+// console.log(movies);
+
 ---
 
-<Layout>
-	<Welcome title="Welcome to Astro" />
+<Layout title="AstroFlim - Non commercial.">
+    <main class="">
+        <div class="flex flex-col gap-4 ">
+            <strong class="block text-center text-lg">
+                Lựa chọn hiện tại: <span class="font-bold text-blue-500">Phim mới</span>
+            </strong>
+
+            <div class="px-10 lg:px-40">
+                <SelectSection client:visible/>
+            </div>
+
+            <MovieGridSection server:defer>
+                <MovieGridSkeleton slot={"fallback"}/>
+            </MovieGridSection>
+        </div>
+    </main>
 </Layout>

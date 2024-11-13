@@ -1,0 +1,45 @@
+---
+import {Pagination} from "@nextui-org/pagination";
+import type {MovieItem, PhimMoiCapNhatResponse} from "@/types/types.ts";
+import MovieCard from "@/components/MovieCard";
+const data: PhimMoiCapNhatResponse = {
+    status: "success",
+    paginate: {
+        current_page: 1,
+        total_page: 100,
+        total_items: 1000,
+        items_per_page: 10
+    },
+    items: Array(10).fill({
+        name: `Phim đang load`,
+        slug: "loading",
+        original_name: "loading",
+        thumb_url: "",
+        poster_url: "",
+        created: "2022-01-01",
+        modified: "2022-01-01",
+        description: "Description",
+        total_episodes: 10,
+        current_episode: "1",
+        time: "2h 30m",
+        quality: "HD",
+        language: "",
+        director: "",
+        casts: ""
+    })
+}
+---
+
+<div class="flex flex-col items-center"
+>
+    {/*MovieGrid*/}
+    <section class="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                {data.items.map((item: MovieItem, index:number) => (
+                        <MovieCard item={item} index={index} isLoading={true}/>
+                ))}
+            </div>
+        </div>
+    </section>
+</div>
