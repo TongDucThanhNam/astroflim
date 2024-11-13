@@ -16,12 +16,15 @@ export default defineConfig({
             isr: {
                 expiration: 60 * 60 * 24,
                 exclude: ['/api/**'],
+            },
+            imagesConfig: {
+                domains: ["wsrv.nl"],
+                sizes: [320, 640, 768, 1024, 1280, 1536, 1920],
             }
         }
     ),
     integrations: [react(), tailwind()],
     env: {
-
         schema: {
 
             PHIM_API: envField.string({context: "server", access: "public"}),
