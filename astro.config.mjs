@@ -24,10 +24,4 @@ export default defineConfig({
         }
     ),
     integrations: [react(), tailwind()],
-    env: {
-        schema: {
-
-            PHIM_API: envField.string({context: "server", access: "public"}),
-        }
-    }
 });
