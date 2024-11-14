@@ -1,16 +1,27 @@
 import {Select, SelectItem} from "@nextui-org/select";
 import {danhMuc, namPhatHanh, quocGia, theLoai} from "@/config/site.ts";
 import {useRef} from "react";
-import { useStore } from '@nanostores/react';
-import { page, apiLink, currentSelected } from '@/store/movieStore';
 
 export default function SelectSection() {
     const MovieRef = useRef(null)
 
-    const $page = useStore(page)
-    const $apiLink = useStore(apiLink)
-    const $currentSelected = useStore(currentSelected)
+    function setApiLink(apiLink: string) {
+        // Lấy URL hiện tại
+        const currentUrl = new URL(window.location.href)
 
+        // Thêm hoặc cập nhật query parameter
+        currentUrl.searchParams.set("apiLink", apiLink)
+
+        //remove page ?
+        currentUrl.searchParams.delete("page")
+
+        // Cập nhật URL mà không reload trang
+        // window.history.pushState({}, '', currentUrl)
+
+        //reload trang
+
+        window.location.href = currentUrl.toString()
+    }
 
     //MovieRef function
     const handleScroll = () => {
@@ -32,12 +43,7 @@ export default function SelectSection() {
                 onSelectionChange={(value) => {
                     const item = theLoai.find((item) => item.typeName === value.currentKey)
                     if (item) {
-                        // setApiLink(item.apiLink)
-                        // setCurrentSelected(item.typeName)
-                        // setCurrentPage(1)
-                        apiLink.set(item.apiLink)
-                        currentSelected.set(item.typeName)
-                        page.set(1)
+                        setApiLink(item.apiLink)
                         handleScroll()
                     }
                 }}
@@ -56,9 +62,7 @@ export default function SelectSection() {
                 onSelectionChange={(value) => {
                     const item = danhMuc.find((item) => item.danhMucName === value.currentKey)
                     if (item) {
-                        apiLink.set(item.apiLink)
-                        currentSelected.set(item.danhMucName)
-                        page.set(1)
+                        setApiLink(item.apiLink)
 
                         //move to the top of the movie
                         handleScroll()
@@ -79,9 +83,7 @@ export default function SelectSection() {
                 onSelectionChange={(value) => {
                     const item = quocGia.find((item) => item.quocGiaName === value.currentKey)
                     if (item) {
-                        apiLink.set(item.apiLink)
-                        currentSelected.set(item.quocGiaName)
-                        page.set(1)
+                        setApiLink(item.apiLink)
                         handleScroll()
 
                     }
@@ -101,9 +103,7 @@ export default function SelectSection() {
                 onSelectionChange={(value) => {
                     const item = namPhatHanh.find((item) => item.namPhatHanhName === value.currentKey)
                     if (item) {
-                        apiLink.set(item.apiLink)
-                        currentSelected.set(item.namPhatHanhName)
-                        page.set(1)
+                        setApiLink(item.apiLink)
                         handleScroll()
                     }
                 }}

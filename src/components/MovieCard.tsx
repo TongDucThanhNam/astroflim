@@ -29,13 +29,11 @@ export default function MovieCard(
                         alt={"loading"}
                         className="w-full h-full object-cover"/>
                 ) : (
-                    <Image
+                    <img
                         loading={index === 0 ? "eager" : "lazy"}
                         src={`//wsrv.nl/?url=${item.thumb_url}&w=200&h=300&output=webp`}
-                        removeWrapper={true}
                         alt={item.name}
                         className="w-full h-full object-cover"
-                        fallbackSrc={"/loading.webp"}
                     />
                 )}
 

@@ -1,17 +1,24 @@
 ---
 import MovieGridComponent from '@/components/MovieGridComponent'
 import PaginationComponent from '@/components/PaginationComponent'
-//Nanostores ?
----
+import { type PhimMoiCapNhatResponse} from "../types/types";
+const referer = Astro.request.headers.get('Referer') || 'http://localhost:4321';
+const url = new URL(referer);
+const page = url.searchParams.get('page') || 1;
+const apiLink = url.searchParams.get('apiLink') || "api/films/danh-sach/phim-dang-chieu";
+const apiFetch = `${import.meta.env.PHIM_API}/${apiLink}?page=${page}`
+const response = await fetch(apiFetch);
+const data: PhimMoiCapNhatResponse = await response.json();
 
+---
 <div class="flex flex-col items-center"
 >
     {/*MovieGrid*/}
     <section class="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div class="container mx-auto px-4 py-8">
-            <MovieGridComponent client:idle/>
+            <MovieGridComponent items={data.items}/>
         </div>
 
-        <PaginationComponent client:visible/>
+        <PaginationComponent page={Number(page)} client:visible/>
     </section>
 </div>

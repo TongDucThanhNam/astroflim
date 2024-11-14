@@ -36,7 +36,7 @@ export const Navbar = () => {
             <Spacer x={1} />
             <Button
                 as={Link}
-                href={`/timkiem/${value}`}
+                href={`/tim-kiem/${value}`}
                 color={"primary"}
                 isIconOnly={true}
             >
