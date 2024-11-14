@@ -18,6 +18,8 @@ import {Spacer} from "@nextui-org/spacer";
 import React from "react";
 import {SearchIcon} from "@nextui-org/shared-icons";
 import {siteConfig} from "@/config/site.ts";
+import { ModeToggle } from '@/components/ui/ModeToggle.tsx';
+
 
 export const Navbar = () => {
     const [value, setValue] = React.useState("");
@@ -78,6 +80,7 @@ export const Navbar = () => {
             >
                 <NavbarItem className="hidden sm:flex gap-2">
                     {/*<ThemeSwitch />*/}
+                    <ModeToggle/>
                 </NavbarItem>
                 <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
 
@@ -85,6 +88,7 @@ export const Navbar = () => {
 
             <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
                 {/*<ThemeSwitch />*/}
+                <ModeToggle/>
                 <NavbarMenuToggle />
             </NavbarContent>
 

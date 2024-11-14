@@ -8,6 +8,6 @@ const movie: PhimDetailResponse = await response.json();
 ---
 <Layout title="Chi tiet">
     <div class="mx-10 lg:mx-20">
-        <MovieSection movieData={movie} client:idle/>
+        <MovieSection movieData={movie} client:visible/>
     </div>
 </Layout>

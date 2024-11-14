@@ -1,0 +1,48 @@
+---
+import {Card, CardContent, CardFooter} from "@/components/ui/Card";
+import { type MovieItem} from "../types/types";
+
+interface Props {
+    item: MovieItem;
+    index: number;
+    isLoading: boolean;
+}
+
+const {
+    item,
+    index,
+    isLoading
+} = Astro.props;
+---
+<a href={`/phim/${item.slug}`} class="block">
+    <Card
+            className="relative border-none h-[500px] w-[333px] sm:h-[400px] sm:w-[267px] md:h-[350px] md:w-[233px] lg:h-[300px] lg:w-[200px]"
+    >
+        <div class=" w-full h-full">
+            {isLoading ? (
+                    <img
+                            loading={index === 0 ? "eager" : "lazy"}
+                            src={"/loading.webp"}
+                            alt={"loading"}
+                            class="w-full h-full object-cover"/>
+            ) : (
+                    <img
+                            loading={index === 0 ? "eager" : "lazy"}
+                            src={`//wsrv.nl/?url=${item.thumb_url}&w=200&h=300&output=webp`}
+                            alt={item.name}
+                            class="w-full h-full object-cover"
+                    />
+            )}
+
+        </div>
+        <CardFooter className="absolute bg-black/40 bottom-0 z-10 w-full">
+            <div class="flex flex-grow gap-2 items-center w-full">
+                <div class="flex flex-col items-center w-full">
+                    <p class="text-center text-xs font-bold text-white">
+                        {item.name}
+                    </p>
+                </div>
+            </div>
+        </CardFooter>
+    </Card>
+</a>

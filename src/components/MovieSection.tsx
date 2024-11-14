@@ -1,5 +1,3 @@
-'use client'
-
 import {useRef, useState} from 'react'
 import {Tab, Tabs} from "@nextui-org/tabs";
 import {RadioGroup} from "@nextui-org/radio";
@@ -14,7 +12,7 @@ interface MoviePageProps {
 }
 
 export default function MovieSection({movieData}: MoviePageProps) {
-    const {movie} = movieData
+    const movie = movieData.movie
     const [selectedEpisode, setSelectedEpisode] = useState<string>()
     const videoSectionRef = useRef(null)
 
@@ -48,6 +46,10 @@ export default function MovieSection({movieData}: MoviePageProps) {
                 </div>
             </div>
         ))
+    }
+
+    if (!movie) {
+        return <div>Loading...</div>
     }
 
     return (

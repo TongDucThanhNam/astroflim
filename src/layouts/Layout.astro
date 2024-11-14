@@ -1,5 +1,8 @@
 ---
 import {Navbar} from '@/components/Navbar'
+import { ClientRouter } from 'astro:transitions';
+import '@/styles/global.css'
+
 ---
 <!doctype html>
 <html lang="en">
@@ -9,6 +12,7 @@ import {Navbar} from '@/components/Navbar'
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>AstroFlim</title>
+		<ClientRouter />
 	</head>
 	<body class="select-none">
 		<Navbar client:idle />

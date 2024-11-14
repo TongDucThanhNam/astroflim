@@ -1,0 +1,15 @@
+---
+import type {MovieItem} from "../types/types";
+import MovieCard from "./MovieCard.astro";
+interface MovieGridComponentProps {
+    items: MovieItem[]
+}
+const {
+    items
+} = Astro.props;
+---
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    {items.map((item: MovieItem, index: number) => (
+            <MovieCard item={item} index={index}/>
+    ))}
+</div>
