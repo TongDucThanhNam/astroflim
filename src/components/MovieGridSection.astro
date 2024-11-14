@@ -2,7 +2,7 @@
 import MovieGridComponent from '@/components/MovieGridComponent'
 import PaginationComponent from '@/components/PaginationComponent'
 import { type PhimMoiCapNhatResponse} from "../types/types";
-const referer = Astro.request.headers.get('Referer') || 'http://localhost:4321';
+const referer = Astro.request.headers.get('Referer') || 'https://astroflim.vercel.app';
 const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
 const apiLink = url.searchParams.get('apiLink') || "api/films/danh-sach/phim-dang-chieu";
