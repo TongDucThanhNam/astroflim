@@ -8,7 +8,14 @@ const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
 const apiLink = url.searchParams.get('apiLink') || "api/films/danh-sach/phim-dang-chieu";
 const apiFetch = `${import.meta.env.PUBLIC_PHIM_API}/${apiLink}?page=${page}`
-const response = await fetch(apiFetch);
+const response = await fetch(apiFetch,
+    {
+        cache: "force-cache",
+        headers: {
+            'Cache-Control': `max-age=${3600*24}, s-maxage=${3600*24}, stale-while-revalidate=${86400}`,
+        },
+    }
+);
 const data: PhimMoiCapNhatResponse = await response.json();
 
 ---

@@ -1,9 +1,16 @@
 ---
-import { type PhimDetailResponse} from "@/types/types";
+import {type PhimDetailResponse} from "@/types/types";
 import Layout from "@/layouts/Layout.astro";
 import MovieSection from "@/components/MovieSection.astro";
 const {slug,} = Astro.params;
-const response = await fetch(`${import.meta.env.PHIM_API}/api/film/${slug}`);
+const response = await fetch(`${import.meta.env.PHIM_API}/api/film/${slug}`,
+    {
+        cache: "force-cache",
+        headers: {
+            'Cache-Control': `max-age=${3600 * 24}, s-maxage=${3600 * 24}, stale-while-revalidate=${86400}`,
+        },
+    }
+);
 const movie: PhimDetailResponse = await response.json();
 ---
 <Layout title="Chi tiet">
