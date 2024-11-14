@@ -1,13 +1,13 @@
 ---
 import { type PhimDetailResponse} from "@/types/types";
 import Layout from "@/layouts/Layout.astro";
-import MovieSection from "@/components/MovieSection";
+import MovieSection from "@/components/MovieSection.astro";
 const {slug,} = Astro.params;
 const response = await fetch(`${import.meta.env.PHIM_API}/api/film/${slug}`);
 const movie: PhimDetailResponse = await response.json();
 ---
 <Layout title="Chi tiet">
     <div class="mx-10 lg:mx-20">
-        <MovieSection movieData={movie} client:visible/>
+        <MovieSection movieData={movie}/>
     </div>
 </Layout>

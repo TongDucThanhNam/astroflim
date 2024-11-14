@@ -1,7 +1,8 @@
 ---
 import MovieGridComponent from '@/components/MovieGridComponent.astro'
 import PaginationComponent from '@/components/PaginationComponent'
-import { type PhimMoiCapNhatResponse} from "../types/types";
+import { type PhimMoiCapNhatResponse} from "@/types/types";
+import {Card} from "./ui/Card";
 const referer = Astro.request.headers.get('Referer') || 'https://astroflim.vercel.app';
 const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
@@ -11,11 +12,10 @@ const response = await fetch(apiFetch);
 const data: PhimMoiCapNhatResponse = await response.json();
 
 ---
-<div class="flex flex-col items-center"
->
+<div class="flex flex-col items-center" transition:persist>
     {/*MovieGrid*/}
     <section class="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div class="container mx-auto px-4 py-8">
+        <div class="container mx-auto px-4 py-8" >
             <MovieGridComponent items={data.items}/>
         </div>
 

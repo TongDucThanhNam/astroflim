@@ -2,6 +2,8 @@
 import {Navbar} from '@/components/Navbar'
 import { ClientRouter } from 'astro:transitions';
 import '@/styles/global.css'
+import ProgressBar from 'astro-vtbot/components/ProgressBar.astro';
+
 
 ---
 <!doctype html>
@@ -13,9 +15,11 @@ import '@/styles/global.css'
 		<meta name="generator" content={Astro.generator} />
 		<title>AstroFlim</title>
 		<ClientRouter />
+		<ProgressBar/>
+
 	</head>
 	<body class="select-none">
-		<Navbar client:idle />
+		<Navbar client:idle transition:persist="nav-bar"/>
 		<slot />
 		<footer class="w-full flex items-center justify-center py-3">
 			Trang web được làm với mục đích học tập, không có mục đích thương mại

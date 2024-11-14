@@ -1,0 +1,48 @@
+---
+import {type PhimDetailResponse} from "@/types/types";
+import MovieWatch from "./MovieWatch";
+
+interface Props {
+    movieData: PhimDetailResponse;
+}
+
+const {
+    movieData,
+} = Astro.props;
+const movie = movieData.movie;
+
+---
+<div class="container mx-auto px-4 py-8">
+    <div class="grid md:grid-cols-3 gap-8">
+        <div class="md:col-span-1">
+            <img
+                    transition:name={`image-${movie.slug}`}
+                    src={`//wsrv.nl/?url=${movie.thumb_url}&w=300&h=450&output=webp`}
+                    alt={movie.name}
+                    width={300}
+                    height={450}
+                    class="rounded-lg shadow-lg w-full"
+            />
+        </div>
+        <div class="md:col-span-2">
+            <h1 class="text-3xl font-bold mb-2">{movie.name}</h1>
+            <h2 class="text-xl text-gray-600 dark:text-gray-400 mb-4">{movie.original_name}</h2>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <p><strong>Đạo diễn:</strong> {movie.director}</p>
+                    <p><strong>Diễn viên:</strong> {movie.casts}</p>
+                    <p><strong>Ngôn ngữ:</strong> {movie.language}</p>
+                </div>
+                <div>
+                    <p><strong>Chất lượng:</strong> {movie.quality}</p>
+                    <p><strong>Thời lượng:</strong> {movie.time}</p>
+                    <p><strong>Số tập:</strong> {movie.current_episode} / {movie.total_episodes}</p>
+                </div>
+            </div>
+            <p class="mb-6">{movie.description}</p>
+        </div>
+
+    </div>
+
+    <MovieWatch movie={movie} client:load/>
+</div>
