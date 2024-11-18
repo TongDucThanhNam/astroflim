@@ -18,7 +18,7 @@ let data: PhimMoiCapNhatResponse = {
     }
 };
 try {
-    const apiFetch = `${phimAPI}/${apiLink}?page=${page}`;
+    const apiFetch = `https://phim.nguonc.com/${apiLink}?page=${page}`;
     const response = await fetch(apiFetch, {
         cache: "force-cache",
         headers: {
