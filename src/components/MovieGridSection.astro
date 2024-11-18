@@ -1,4 +1,5 @@
 ---
+import {phimAPI} from "../config/env";
 import MovieGridComponent from '@/components/MovieGridComponent.astro'
 import PaginationComponent from '@/components/PaginationComponent'
 import { type PhimMoiCapNhatResponse} from "@/types/types";
@@ -7,7 +8,7 @@ const referer = Astro.request.headers.get('Referer') || 'https://astroflim.verce
 const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
 const apiLink = url.searchParams.get('apiLink') || "api/films/danh-sach/phim-dang-chieu";
-const apiFetch = `${import.meta.env.PUBLIC_PHIM_API}/${apiLink}?page=${page}`
+const apiFetch = `${phimAPI}/${apiLink}?page=${page}`
 const response = await fetch(apiFetch,
     {
         cache: "force-cache",
