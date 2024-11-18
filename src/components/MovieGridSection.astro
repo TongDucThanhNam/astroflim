@@ -2,30 +2,48 @@
 import {phimAPI} from "../config/env";
 import MovieGridComponent from '@/components/MovieGridComponent.astro'
 import PaginationComponent from '@/components/PaginationComponent'
-import { type PhimMoiCapNhatResponse} from "@/types/types";
+import {type PhimMoiCapNhatResponse} from "@/types/types";
 const referer = Astro.request.headers.get('Referer') || 'https://astroflim.vercel.app';
 const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
 const apiLink = url.searchParams.get('apiLink') || "api/films/danh-sach/phim-dang-chieu";
-const apiFetch = `${phimAPI}/${apiLink}?page=${page}`
-const response = await fetch(apiFetch,
-    {
+let data: PhimMoiCapNhatResponse = {
+    status: "",
+    items: [],
+    paginate: {
+        current_page: 1,
+        items_per_page: 1,
+        total_items: 1,
+        total_page: 1,
+    }
+};
+try {
+    const apiFetch = `${phimAPI}/${apiLink}?page=${page}`;
+    const response = await fetch(apiFetch, {
         cache: "force-cache",
         headers: {
-            'Cache-Control': `max-age=${3600*24}, s-maxage=${3600*24}, stale-while-revalidate=${86400}`,
+            'Cache-Control': `max-age=${3600 * 24}, s-maxage=${3600 * 24}, stale-while-revalidate=${86400}`,
         },
-    }
-);
-const data: PhimMoiCapNhatResponse = await response.json();
-
+    });
+    data = await response.json();
+} catch (error) {
+    console.error('Error fetching data:', error);
+    return new Response('Not Found', {status: 404});
+}
 ---
 <div class="flex flex-col items-center" transition:persist>
     {/*MovieGrid*/}
     <section class="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div class="container mx-auto px-4 py-8" >
-            <MovieGridComponent items={data.items}/>
+        <div class="container mx-auto px-4 py-8">
+            {data.items.length > 0 ? (
+                    <MovieGridComponent items={data.items}/>
+            ) : (
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <h1 class="text-2xl font-bold text-center">Không có dữ liệu</h1>
+                        <p class="text-lg text-center">Vui lòng thử lại sau</p>
+                    </div>
+            )}
         </div>
-
         <PaginationComponent page={Number(page)} client:visible/>
     </section>
 </div>
