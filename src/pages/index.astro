@@ -1,12 +1,15 @@
 ---
+import {phimAPI} from "../config/env";
 export const prerender = true
 import Layout from '@/layouts/Layout.astro';
 import SelectSection from "@/components/SelectSection";
 import MovieGridSection from "@/components/MovieGridSection.astro";
 import MovieGridSkeleton from "@/components/MovieGridSkeleton.astro";
+
 ---
 
 <Layout title="AstroFlim - Non commercial.">
+    {phimAPI}
     <main class="">
         <div class="flex flex-col gap-4 ">
             <div class="px-10 lg:px-40" >

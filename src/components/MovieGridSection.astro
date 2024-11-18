@@ -3,7 +3,6 @@ import {phimAPI} from "../config/env";
 import MovieGridComponent from '@/components/MovieGridComponent.astro'
 import PaginationComponent from '@/components/PaginationComponent'
 import { type PhimMoiCapNhatResponse} from "@/types/types";
-import {Card} from "./ui/Card";
 const referer = Astro.request.headers.get('Referer') || 'https://astroflim.vercel.app';
 const url = new URL(referer);
 const page = url.searchParams.get('page') || 1;
